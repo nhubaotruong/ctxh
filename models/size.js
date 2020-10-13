@@ -5,6 +5,10 @@ module.exports = (app) => {
             required: [true, 'Tên size không được để trống'],
             trim: true
         },
+        active: {
+            type: Boolean,
+            default: true
+        }
     }, { timestamps: true });
 
     const model = app.modelAreadyDeclared('Size') ? app.db.model('Size') : app.db.model('Size', schema);

@@ -30,4 +30,13 @@ module.exports = app => {
         modelPaths.forEach(path => require(path)(app));
         if (loadController) controllerPaths.forEach(path => require(path)(app));
     }
+
+    app.createResponse = (req, res, path) => {
+        const http = require('http');
+        http.get('http://localhost:' + (app.port + 1) + path, response => {
+            let data = '';
+            response.on('data', chunk => data += chunk);
+            response.on('end', () => res.send(data));
+        });
+    };
 }

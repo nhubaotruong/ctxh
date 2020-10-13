@@ -1,9 +1,28 @@
 module.exports = app => {
-    const compression = require('compression');
-    app.use(compression());
+    const morgan = require('morgan');
+    app.use(morgan('dev'));
 
     const helmet = require('helmet');
     app.use(helmet());
+
+    const { expressCspHeader, INLINE, NONE, SELF, NONCE, EVAL } = require('express-csp-header');
+    app.use(expressCspHeader({
+        directives: {
+            'default-src': [SELF],
+            'script-src': [SELF, INLINE, EVAL],
+            'style-src': [SELF, INLINE],
+            // 'img-src': ['data:', 'images.com'],
+            'worker-src': [SELF, INLINE],
+            'block-all-mixed-content': false
+        }
+    }))
+
+
+    const compression = require('compression');
+    app.use(compression());
+
+    // const cors = require('cors');
+    // app.use(cors());
 
     const bb = require('express-busboy');
     bb.extend(app);

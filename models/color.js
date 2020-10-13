@@ -5,11 +5,15 @@ module.exports = (app) => {
             required: [true, 'Tên màu không được để trống'],
             trim: true
         },
+        active: {
+            type: Boolean,
+            default: true
+        }
     }, { timestamps: true })
 
     const model = app.modelAreadyDeclared('Color') ? app.db.model('Color') : app.db.model('Color', schema);
 
-    module.exports = {
+    app.model.color = {
         create: async (data) => await model.create(data).catch(_ => { throw new Error('Không thể tạo màu') }),
 
         getPage: async (pageNumber, pageSize, condition) => {

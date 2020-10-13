@@ -7,20 +7,6 @@
     "@babel/plugin-syntax-dynamic-import",
     "@babel/plugin-transform-runtime",
     "@babel/plugin-proposal-optional-chaining",
-    [
-      "@babel/plugin-transform-react-jsx",
-      {
-        "pragma": "h",
-        "pragmaFrag": "Fragment"
-      }
-    ],
-    [
-      "babel-plugin-jsx-pragmatic",
-      {
-        "module": "preact",
-        "import": "h",
-        "export": "h"
-      }
-    ]
+    "@babel/plugin-proposal-class-properties"
   ]
 }
